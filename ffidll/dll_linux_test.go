@@ -5,12 +5,14 @@ import dll "ffidll"
 import . "fmt"
 
 func TestLoad(t *testing.T) {
-  lib := dll.Open("/usr/lib/libSDL-1.2.so.0")
+  lib := dll.Open("../test/hellolib.so")
   Println(dll.Error())
-  fun := lib.Sym("SDL_GetError")
+  fun := lib.Sym("hello")
   _ = fun
-  Println(dll.Error()) 
-  // fun.CallVoid(); // Doesn't work yet. We need libffi
+  Println(dll.Error())
+  // fun.CallVoid() // Doesn't work. We need libffi
+  call := dll.Prepare(fun, 0);
+  call.Call();
   lib.Close()
   Println(dll.Error())
   

@@ -1,93 +1,110 @@
+// Created by cgo - DO NOT EDIT
+//line ffi.go:1
 package ffidll
 
 // #include <stdlib.h>
 // #include <dlfcn.h>
 // #include <ffi.h>
-import "C"
-// import "unsafe" 
+
+// import "unsafe"
 
 
-type Kind uint16 
+type Kind uint16
 
-const ( 
-  TYPE_VOID   = Kind(1 + iota)
-  TYPE_UINT8  = Kind(1 + iota)
-  TYPE_SINT8  = Kind(1 + iota)
-  TYPE_UINT16 = Kind(1 + iota)
-  TYPE_SINT16 = Kind(1 + iota)
-  TYPE_UINT32 = Kind(1 + iota)
-  TYPE_SINT32 = Kind(1 + iota)
-  TYPE_UINT64 = Kind(1 + iota)
-  TYPE_SINT64 = Kind(1 + iota)
-  TYPE_FLOAT  = Kind(1 + iota)
-  TYPE_DOUBLE = Kind(1 + iota)
-  TYPE_UCHAR  = Kind(1 + iota)
-  TYPE_SCHAR  = Kind(1 + iota)
-  TYPE_USHORT = Kind(1 + iota)
-  TYPE_SSHORT = Kind(1 + iota)
-  TYPE_UINT   = Kind(1 + iota)
-  TYPE_SINT   = Kind(1 + iota)
-  TYPE_ULONG  = Kind(1 + iota)
-  TYPE_SLONG  = Kind(1 + iota)
-  TYPE_LONGD  = Kind(1 + iota)
-  TYPE_POINTER= Kind(1 + iota)
-  TYPE_STRUCT = Kind(1 + iota)
+const (
+	TYPE_VOID	= Kind(1 + iota)
+	TYPE_UINT8	= Kind(1 + iota)
+	TYPE_SINT8	= Kind(1 + iota)
+	TYPE_UINT16	= Kind(1 + iota)
+	TYPE_SINT16	= Kind(1 + iota)
+	TYPE_UINT32	= Kind(1 + iota)
+	TYPE_SINT32	= Kind(1 + iota)
+	TYPE_UINT64	= Kind(1 + iota)
+	TYPE_SINT64	= Kind(1 + iota)
+	TYPE_FLOAT	= Kind(1 + iota)
+	TYPE_DOUBLE	= Kind(1 + iota)
+	TYPE_UCHAR	= Kind(1 + iota)
+	TYPE_SCHAR	= Kind(1 + iota)
+	TYPE_USHORT	= Kind(1 + iota)
+	TYPE_SSHORT	= Kind(1 + iota)
+	TYPE_UINT	= Kind(1 + iota)
+	TYPE_SINT	= Kind(1 + iota)
+	TYPE_ULONG	= Kind(1 + iota)
+	TYPE_SLONG	= Kind(1 + iota)
+	TYPE_LONGD	= Kind(1 + iota)
+	TYPE_POINTER	= Kind(1 + iota)
+	TYPE_STRUCT	= Kind(1 + iota)
 )
 
-type Type struct {
-
-}
+type Type struct{}
 
 
-
-
-func (kind Kind) c() (* C.ffi_type) { 
-  switch (kind) { 
-  case TYPE_VOID: 	return &C.ffi_type_void
-  case TYPE_UINT8:	return &C.ffi_type_uint8
-  case TYPE_SINT8:	return &C.ffi_type_sint8
-  case TYPE_UINT16:	return &C.ffi_type_uint16
-  case TYPE_SINT16:	return &C.ffi_type_sint16
-  case TYPE_UINT32:	return &C.ffi_type_uint32
-  case TYPE_SINT32:	return &C.ffi_type_sint32
-  case TYPE_UINT64:	return &C.ffi_type_uint64
-  case TYPE_SINT64:	return &C.ffi_type_sint64
-  case TYPE_DOUBLE:	return &C.ffi_type_double
-  case TYPE_FLOAT:	return &C.ffi_type_float
-  case TYPE_UCHAR:	return &C.ffi_type_uchar
-  case TYPE_SCHAR:	return &C.ffi_type_schar
-  case TYPE_USHORT:	return &C.ffi_type_ushort
-  case TYPE_SSHORT:	return &C.ffi_type_sshort
-  case TYPE_UINT:	return &C.ffi_type_uint
-  case TYPE_SINT:	return &C.ffi_type_sint  
-  case TYPE_ULONG:	return &C.ffi_type_ulong
-  case TYPE_SLONG:	return &C.ffi_type_slong
-  case TYPE_POINTER:	return &C.ffi_type_pointer
-  default:
-    return nil
-  }
-  return nil
+func (kind Kind) c() *_C_ffi_type {
+	switch kind {
+	case TYPE_VOID:
+		return &*_C_ffi_type_void
+	case TYPE_UINT8:
+		return &*_C_ffi_type_uint8
+	case TYPE_SINT8:
+		return &*_C_ffi_type_sint8
+	case TYPE_UINT16:
+		return &*_C_ffi_type_uint16
+	case TYPE_SINT16:
+		return &*_C_ffi_type_sint16
+	case TYPE_UINT32:
+		return &*_C_ffi_type_uint32
+	case TYPE_SINT32:
+		return &*_C_ffi_type_sint32
+	case TYPE_UINT64:
+		return &*_C_ffi_type_uint64
+	case TYPE_SINT64:
+		return &*_C_ffi_type_sint64
+	case TYPE_DOUBLE:
+		return &*_C_ffi_type_double
+	case TYPE_FLOAT:
+		return &*_C_ffi_type_float
+	case TYPE_UCHAR:
+		return &*_C_ffi_type_uchar
+	case TYPE_SCHAR:
+		return &*_C_ffi_type_schar
+	case TYPE_USHORT:
+		return &*_C_ffi_type_ushort
+	case TYPE_SSHORT:
+		return &*_C_ffi_type_sshort
+	case TYPE_UINT:
+		return &*_C_ffi_type_uint
+	case TYPE_SINT:
+		return &*_C_ffi_type_sint
+	case TYPE_ULONG:
+		return &*_C_ffi_type_ulong
+	case TYPE_SLONG:
+		return &*_C_ffi_type_slong
+	case TYPE_POINTER:
+		return &*_C_ffi_type_pointer
+	default:
+		return nil
+	}
+	return nil
 }
 
 type Callable struct {
-  cif C.ffi_cif  
-  fun * Function
+	cif	_C_ffi_cif
+	fun	*Function
 }
 
 
-type ffi_func *[0]uint8;
+type ffi_func *[0]uint8
 
-func Prepare(fun * Function, nargs uint) (* Callable) {
-  call 		:= &Callable{}
-  call.fun 	 = fun
-  stat 		:= C.ffi_prep_cif(&call.cif, C.FFI_DEFAULT_ABI, C.uint(nargs),
-		   &C.ffi_type_void, nil);
-  _ = stat
-  return call;
-} 
+func Prepare(fun *Function, nargs uint) *Callable {
+	call := &Callable{}
+	call.fun = fun
+	stat := _C_ffi_prep_cif(&call.cif, FFI_DEFAULT_ABI, _C_uint(nargs), &*_C_ffi_type_void, nil)
+	_ = stat
+	return call
+}
 
-func (call * Callable) Call() {
-  C.ffi_call(&call.cif, ffi_func(call.fun.ptr), nil, nil);
+func (call *Callable) Call() {
+	_C_ffi_call(&call.cif, ffi_func(call.fun.ptr), nil, nil)
 }
 
 
@@ -119,7 +136,7 @@ ffi_status ffi_prep_cif (ffi_cif *CIF, ffi_abi ABI,
 
  -- Function: void ffi_call (ffi_cif *CIF, void *FN, void *RVALUE, void
           **AVALUES)
-	  
+
 ffi_type_void'
      The type `void'.  This cannot be used for argument types, only for
      return values.
@@ -217,9 +234,5 @@ closure function:
           **ARGS, void *USER_DATA), void *USER_DATA, void *CODELOC)
      Prepare a closure function.
 
-	  
+
 */
-
-
-
-

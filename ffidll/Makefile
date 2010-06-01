@@ -8,11 +8,11 @@ TARG=ffidll
 
 # GOFILES:=structs.$(O).go
 # audio.go
-CGOFILES:=dll_$(GOOS).go 
+CGOFILES:=dll_$(GOOS).go ffi.go
 
 # CGO_CFLAGS:=`pkg-config --cflags sdl`
 # CGO_CFLAGS:=`sdl-config --cflags`
-CGO_LDFLAGS:=-ldl
+CGO_LDFLAGS:=-ldl -lffi
 # CGO_LDFLAGS:=`sdl-config --libs` -lSDL_image -lSDL_ttf -lSDL_mixer
 
 CLEANFILES+=ffidll

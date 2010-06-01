@@ -2,6 +2,7 @@
 //line dll_linux.go:1
 package ffidll
 // #include <stdlib.h>
+// #include <ffi.h>
 // #include <dlfcn.h>
 
 import "unsafe"
@@ -138,6 +139,12 @@ func (library *Library) Sym(name string) *Function {
 type VoidFunc func()
 
 func (fun *Function) CallVoid() {
+	if fun == nil {
+		return
+	}
+	if fun.ptr == nil {
+		return
+	}
 	var vf *VoidFunc = nil
 	vf = (*VoidFunc)(fun.ptr)
 	(*vf)()
