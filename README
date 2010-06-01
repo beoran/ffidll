@@ -1,0 +1,6 @@
+A go package that implements fuoreign function interface and DLL loading using 
+libffi (which has a BSD license) and a custom OS-specific DLL loading interface. 
+
+License: 
+
+This project is licensed unther the ZLib license. 
