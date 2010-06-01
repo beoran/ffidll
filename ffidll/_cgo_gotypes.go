@@ -1,5 +1,5 @@
 // Created by cgo - DO NOT EDIT
-package dll
+package ffidll
 
 import "unsafe"
 

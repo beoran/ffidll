@@ -1,7 +1,7 @@
-package dll
+package ffidll
 
 import "testing"
-import "ffidll/dll"
+import dll "ffidll"
 import . "fmt"
 
 func TestLoad(t *testing.T) {

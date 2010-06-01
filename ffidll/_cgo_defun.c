@@ -24,7 +24,7 @@ void
 	FLUSH(&p);
 }
 
-#pragma dynimport _cgo_calloc _cgo_calloc "/home/bjorn/arch/dl/go/gc/pkg/linux_386/ffidll/dll.so"
+#pragma dynimport _cgo_calloc _cgo_calloc "/home/bjorn/arch/dl/go/gc/pkg/linux_386/ffidll.so"
 void (*_cgo_calloc)(void*);
 
 void
@@ -33,7 +33,7 @@ void
 	cgocall(_cgo_calloc, &p);
 }
 
-#pragma dynimport _cgo_dlerror _cgo_dlerror "/home/bjorn/arch/dl/go/gc/pkg/linux_386/ffidll/dll.so"
+#pragma dynimport _cgo_dlerror _cgo_dlerror "/home/bjorn/arch/dl/go/gc/pkg/linux_386/ffidll.so"
 void (*_cgo_dlerror)(void*);
 
 void
@@ -42,7 +42,7 @@ void
 	cgocall(_cgo_dlerror, &p);
 }
 
-#pragma dynimport _cgo_dlsym _cgo_dlsym "/home/bjorn/arch/dl/go/gc/pkg/linux_386/ffidll/dll.so"
+#pragma dynimport _cgo_dlsym _cgo_dlsym "/home/bjorn/arch/dl/go/gc/pkg/linux_386/ffidll.so"
 void (*_cgo_dlsym)(void*);
 
 void
@@ -51,7 +51,7 @@ void
 	cgocall(_cgo_dlsym, &p);
 }
 
-#pragma dynimport _cgo_free _cgo_free "/home/bjorn/arch/dl/go/gc/pkg/linux_386/ffidll/dll.so"
+#pragma dynimport _cgo_free _cgo_free "/home/bjorn/arch/dl/go/gc/pkg/linux_386/ffidll.so"
 void (*_cgo_free)(void*);
 
 void
@@ -60,7 +60,7 @@ void
 	cgocall(_cgo_free, &p);
 }
 
-#pragma dynimport _cgo_dlclose _cgo_dlclose "/home/bjorn/arch/dl/go/gc/pkg/linux_386/ffidll/dll.so"
+#pragma dynimport _cgo_dlclose _cgo_dlclose "/home/bjorn/arch/dl/go/gc/pkg/linux_386/ffidll.so"
 void (*_cgo_dlclose)(void*);
 
 void
@@ -69,7 +69,7 @@ void
 	cgocall(_cgo_dlclose, &p);
 }
 
-#pragma dynimport _cgo_dlopen _cgo_dlopen "/home/bjorn/arch/dl/go/gc/pkg/linux_386/ffidll/dll.so"
+#pragma dynimport _cgo_dlopen _cgo_dlopen "/home/bjorn/arch/dl/go/gc/pkg/linux_386/ffidll.so"
 void (*_cgo_dlopen)(void*);
 
 void

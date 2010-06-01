@@ -1,6 +1,6 @@
 // Created by cgo - DO NOT EDIT
 //line dll_linux.go:1
-package dll
+package ffidll
 // #include <stdlib.h>
 // #include <dlfcn.h>
 

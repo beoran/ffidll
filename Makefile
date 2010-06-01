@@ -15,6 +15,6 @@ test-ffidll: test-ffidll.go libs
 	$(LD) -o $@ test-ffidll.$(O)
 	
 clean:
-	make -C ffi dll clean
+	make -C ffidll clean
 	rm -f -r *.8 *.6 *.o */*.8 */*.6 */*.o */_obj test-fungo test-gui test-midi
 	
