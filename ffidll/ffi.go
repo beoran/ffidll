@@ -4,12 +4,56 @@ package ffidll
 // #include <dlfcn.h>
 // #include <ffi.h>
 import "C"
-// import "unsafe" 
+import "unsafe"
+// import "fmt"
+
+
+// Memory is a wrapper type around a block of memory allocated for 
+// this program using the C allocator library functions.  
+type Memory struct {
+  ptr   unsafe.Pointer 
+  size  int
+}
+  
+  
+  
+// Returns the size of the memory block.  
+func (mem * Memory) Size() (int) {
+  if (mem == nil) { return -1 }
+  if (mem.ptr == nil) { return -1 }
+  return mem.size
+}
+
+// Returns the unsafe.Pointer that points to this memory block. 
+func (mem * Memory) Ptr() (unsafe.Pointer) {
+  if (mem == nil)     { return nil }
+  if (mem.ptr == nil) { return nil }
+  return mem.ptr
+}
+
+// Frees any memory allocated. Protected from double deallocation.
+func (mem * Memory) Free() {
+  if (mem == nil)     { return }
+  if (mem.ptr == nil) { return }
+  C.free(mem.ptr)
+  return  
+}
+
+// Allocates a pointer to new block of memorty of the given size.
+// May return nil if no memory could be allocated.
+func Allocate(size int) (* Memory) {
+  mem         := &Memory{};
+  mem.size     = size
+  mem.ptr      = C.malloc(C.size_t(mem.size));
+  if (mem.ptr == nil) { return nil; }
+  return mem;
+}
+
 
 
 type Kind uint16 
 
-const ( 
+const (
   TYPE_VOID   = Kind(1 + iota)
   TYPE_UINT8  = Kind(1 + iota)
   TYPE_SINT8  = Kind(1 + iota)
@@ -69,25 +113,58 @@ func (kind Kind) c() (* C.ffi_type) {
   return nil
 }
 
-type Callable struct {
-  cif C.ffi_cif  
-  fun * Function
+type Callable struct {  
+  cif     * C.ffi_cif
+  fun     * Function
+  cifmem  * Memory
+  argimem * Memory 
+  cifs C.ffi_cif;
 }
+
 
 
 type ffi_func *[0]uint8;
 
-func Prepare(fun * Function, nargs uint) (* Callable) {
-  call 		:= &Callable{}
-  call.fun 	 = fun
-  stat 		:= C.ffi_prep_cif(&call.cif, C.FFI_DEFAULT_ABI, C.uint(nargs),
-		   &C.ffi_type_void, nil);
-  _ = stat
-  return call;
+func Prepare(fun * Function, nargs uint) (* Callable, int) {
+  var ffi_type_void C.ffi_type = C.ffi_type { C.size_t(1), C.ushort(1), C.FFI_TYPE_VOID, nil }
+
+  var cif C.ffi_cif
+  var typp * C.ffi_type
+  // recover from panic here 
+  defer func() {
+    if x := recover(); x != nil {
+      println("panicking with value", x)      
+    }
+    println("function returns normally") // executes only when hideErrors==true
+  }()
+
+  
+  call 		 := &Callable{}
+  println("cif size: ", unsafe.Sizeof(cif));
+  call.cifmem = Allocate(unsafe.Sizeof(cif) + 100)
+  call.argimem= Allocate(unsafe.Sizeof(typp) * 10)
+  call.cif    = &call.cifs 
+  
+  // (*C.ffi_cif)(call.cifmem.Ptr())
+  // fmt.Println("cif ABI, nargs:", int(call.cif.abi), int(call.cif.nargs))
+  call.cif.abi   = C.FFI_DEFAULT_ABI
+  call.cif.nargs = C.uint(nargs)
+  call.fun       = fun
+  call.cif.rtype = &C.ffi_type_void; 
+  //stat          := 777
+  println("cif address:", (unsafe.Pointer)(call.cif));
+  println("void type address:", (unsafe.Pointer)(&ffi_type_void));
+  println("cgo void type address:", (unsafe.Pointer)(&C.ffi_type_void));
+
+  stat := C.ffi_prep_cif(call.cif, C.FFI_DEFAULT_ABI, C.uint(nargs),
+          &ffi_type_void, nil);
+          
+		   /*&C.ffi_type_void, (**C.ffi_type)(call.argimem.ptr))*/
+  return call, int(stat);
 } 
 
 func (call * Callable) Call() {
-  C.ffi_call(&call.cif, ffi_func(call.fun.ptr), nil, nil);
+  C.ffi_call(call.cif, ffi_func(call.fun.ptr), nil, nil);
 }
 
 

@@ -117,7 +117,11 @@ func (library *Library) Close() int {
 
 
 func Error() string {
-	return _C_GoString(_C_dlerror())
+	err := _C_dlerror()
+	if err == nil {
+		return "OK"
+	}
+	return _C_GoString(err)
 }
 
 func (library *Library) Sym(name string) *Function {

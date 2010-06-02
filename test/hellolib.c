@@ -8,3 +8,8 @@ void init() {
 void hello(void) {
   puts("Hello from hellolib!");
 }
+
+void say_nothing_at_all(void) {
+  
+}
+

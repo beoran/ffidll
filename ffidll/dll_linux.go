@@ -114,15 +114,17 @@ func (library * Library) Close() (int) {
 
 
 func Error() (string) {
-    return C.GoString(C.dlerror());
+    err := C.dlerror()
+    if (err == nil) { return "OK" }
+    return C.GoString(err)
 }
 
 func (library * Library) Sym(name string) (*Function) {
 	if (library == nil) { return nil } 
 	if (library.ptr == nil) { return nil } 
-	function 		:= &Function{}
+	function 		      := &Function{}
 	function.name 	 	 = name
-	cname 			:= cstr(function.name) 
+	cname 			      := cstr(function.name) 
 	defer cname.free()
 	function.ptr  	 	 = C.dlsym(library.ptr, cname)
 	return function

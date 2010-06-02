@@ -5,14 +5,14 @@
 
 include $(GOROOT)/src/Make.$(GOARCH)
 
-all: libs test-ffidll
+all: libs test/test-ffidll
 
 libs:
 	make -C ffidll install
 
-test-ffidll: test-ffidll.go libs
-	$(GC) test-ffidll.go
-	$(LD) -o $@ test-ffidll.$(O)
+test/test-ffidll: test/test-ffidll.go libs
+	$(GC) -o test/test-ffidll.$(O) test/test-ffidll.go  
+	$(LD) -o $@ test/test-ffidll.$(O)
 	
 clean:
 	make -C ffidll clean

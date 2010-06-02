@@ -1,14 +1,14 @@
-package ffidll
+package main
 
-import "testing"
+// import "testing"
 import dll "ffidll"
 import . "fmt"
 import "time"
 
-func TestLoad(t *testing.T) {
+func TestLoad() {
   lib := dll.Open("../test/hellolib.so")
   Println(dll.Error())
-  fun := lib.Sym("say_nothing_at_all")
+  fun := lib.Sym("hello")
   _ = fun
   Println(dll.Error())
   Println("CallVoid")
@@ -22,11 +22,16 @@ func TestLoad(t *testing.T) {
   Println("Call Speed:", status)
   start := time.Nanoseconds() 
   for i = 0 ; i < reps ; i ++ {
-    call.Call()
+    Printf("%d ", i)
+    call.Call() 
   }
   stop := time.Nanoseconds()
-  delta := stop - start
-  Println(delta, reps, delta / int64(reps))  
+  Println(start - stop, reps, (start - stop) / int64(reps))  
   lib.Close()
   Println(dll.Error())
 }
+
+func main() {
+  TestLoad();
+}
+

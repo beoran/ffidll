@@ -49,6 +49,7 @@ var _C_ffi_type_sint64 *_C_ffi_type
 var _C_ffi_type_pointer *_C_ffi_type
 var _C_ffi_type_uint32 *_C_ffi_type
 var _C_ffi_type_void *_C_ffi_type
+const FFI_TYPE_VOID = 0
 const RTLD_LAZY = 0x00001
 const RTLD_LOCAL = 0
 const FFI_DEFAULT_ABI = 1
@@ -58,6 +59,7 @@ func _C_calloc(_C_size_t, _C_size_t) unsafe.Pointer
 func _C_CString(string) *_C_char
 func _C_dlerror() *_C_char
 func _C_dlsym(unsafe.Pointer, *_C_char) unsafe.Pointer
+func _C_malloc(_C_size_t) unsafe.Pointer
 func _C_free(unsafe.Pointer)
 func _C_dlclose(unsafe.Pointer) _C_int
 func _C_ffi_prep_cif(*_C_ffi_cif, _C_ffi_abi, _C_uint, *_C_ffi_type, **_C_ffi_type) _C_ffi_status
