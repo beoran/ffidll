@@ -1,0 +1,48 @@
+#mode preservelf 1
+#mode comment "/*" "*/"
+#mode comment "//" "\n"
+#mode comment "\\\n" ""
+#mode string  "\"" "\"" "\\"
+#mode string  "'" "'" "\\"
+//#mode user "" "" "(" "," ")" "(" ")" "#" "\\"
+// #mode user "" "" "(" " " ")" "(" ")" "#" "\\"
+/* #mode meta "#{" "}" "(" "," ")" "(" ")" */
+// #mode meta "#" "" "(" "){" "}" "{" "}" 
+// #mode meta "#" "\n" "(" "," ")" "" "" 
+// #mode meta "\W#\w" "" " " " " "\n" "" ""
+// #mode meta "\W(\w" "\W)" "(" "\b" ")" "(" ")"
+//  -U "<#" "/>" "\B" "|" "/>" "<" ">" "#" "\\"
+// -U "\\" "" "{" "}{" "}" "{" "}" "#" "@"
+// #mode meta "\W(\w" "\w)" " " " " "\n" "(" ")"
+// #mode meta "" "" "(" " " ")" "(" ")" "#" "\\"
+// #mode user "" "" "(" "," ")" "(" ")" "#" "\\"
+//#mode meta "." "\n" "(" "{" ")" "(" ")"
+#mode user ""  "\n" "(" "," ")" "(" ")" "#" "\\"
+#mode meta "." "\n" "(" "{" ")" "(" ")"
+
+.define(hello)
+ 
+.define(sum(a,b){.eval(#1+#2))
+
+/*
+#define macro #define #1 #2 # 3 #4 #5 #6 #7 #8 #9
+macro(sum, \#1, \#2, #eval \#1+\#2)
+*/
+
+.ifdef(hello)
+"Hello"
+sum(1,2)
+
+.endif
+
+
+
+
+
+
+
+
+
+
+
+
