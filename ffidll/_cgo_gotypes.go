@@ -29,29 +29,22 @@ type _C_ffi_status uint32
 type _C_ffi_abi uint32
 type _C_ffi_cif _Cstruct___0
 type _C_void [0]byte
-var _C_ffi_type_float *_C_ffi_type
-var _C_ffi_type_ulong *_C_ffi_type
-var _C_ffi_type_uint8 *_C_ffi_type
-var _C_ffi_type_sint32 *_C_ffi_type
-var _C_ffi_type_double *_C_ffi_type
-var _C_ffi_type_uint *_C_ffi_type
-var _C_ffi_type_sint8 *_C_ffi_type
-var _C_ffi_type_ushort *_C_ffi_type
-var _C_ffi_type_slong *_C_ffi_type
-var _C_ffi_type_sint16 *_C_ffi_type
-var _C_ffi_type_sint *_C_ffi_type
-var _C_ffi_type_uchar *_C_ffi_type
-var _C_ffi_type_sshort *_C_ffi_type
-var _C_ffi_type_schar *_C_ffi_type
-var _C_ffi_type_uint16 *_C_ffi_type
-var _C_ffi_type_uint64 *_C_ffi_type
-var _C_ffi_type_sint64 *_C_ffi_type
-var _C_ffi_type_pointer *_C_ffi_type
-var _C_ffi_type_uint32 *_C_ffi_type
 var _C_ffi_type_void *_C_ffi_type
+const FFI_TYPE_FLOAT = 2
+const FFI_TYPE_UINT32 = 9
 const FFI_TYPE_VOID = 0
+const FFI_TYPE_UINT16 = 7
+const FFI_TYPE_UINT8 = 5
+const FFI_TYPE_SINT16 = 8
 const RTLD_LAZY = 0x00001
 const RTLD_LOCAL = 0
+const FFI_TYPE_STRUCT = 13
+const FFI_TYPE_SINT32 = 10
+const FFI_TYPE_SINT64 = 12
+const FFI_TYPE_SINT8 = 6
+const FFI_TYPE_UINT64 = 11
+const FFI_TYPE_POINTER = 14
+const FFI_TYPE_DOUBLE = 3
 const FFI_DEFAULT_ABI = 1
 
 func _C_GoString(*_C_char) string

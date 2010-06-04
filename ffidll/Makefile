@@ -6,13 +6,13 @@ include $(GOROOT)/src/Make.$(GOARCH)
 
 TARG=ffidll
 
-# GOFILES:=structs.$(O).go
+GOFILES:=helper.go
 # audio.go
 CGOFILES:=dll_$(GOOS).go ffi.go
 
 # CGO_CFLAGS:=`pkg-config --cflags sdl`
-# CGO_CFLAGS:=`sdl-config --cflags`
-CGO_LDFLAGS:=-ldl -lffi
+#CGO_CFLAGS:=-I../test 
+CGO_LDFLAGS:=-ldl -lffi 
 # CGO_LDFLAGS:=`sdl-config --libs` -lSDL_image -lSDL_ttf -lSDL_mixer
 
 CLEANFILES+=ffidll

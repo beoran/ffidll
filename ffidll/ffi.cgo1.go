@@ -66,82 +66,67 @@ func Allocate(size int) *Memory {
 
 
 type Kind uint16
-
+/*
 const (
-	TYPE_VOID	= Kind(1 + iota)
-	TYPE_UINT8	= Kind(1 + iota)
-	TYPE_SINT8	= Kind(1 + iota)
-	TYPE_UINT16	= Kind(1 + iota)
-	TYPE_SINT16	= Kind(1 + iota)
-	TYPE_UINT32	= Kind(1 + iota)
-	TYPE_SINT32	= Kind(1 + iota)
-	TYPE_UINT64	= Kind(1 + iota)
-	TYPE_SINT64	= Kind(1 + iota)
-	TYPE_FLOAT	= Kind(1 + iota)
-	TYPE_DOUBLE	= Kind(1 + iota)
-	TYPE_UCHAR	= Kind(1 + iota)
-	TYPE_SCHAR	= Kind(1 + iota)
-	TYPE_USHORT	= Kind(1 + iota)
-	TYPE_SSHORT	= Kind(1 + iota)
-	TYPE_UINT	= Kind(1 + iota)
-	TYPE_SINT	= Kind(1 + iota)
-	TYPE_ULONG	= Kind(1 + iota)
-	TYPE_SLONG	= Kind(1 + iota)
-	TYPE_LONGD	= Kind(1 + iota)
-	TYPE_POINTER	= Kind(1 + iota)
-	TYPE_STRUCT	= Kind(1 + iota)
+  TYPE_VOID   = Kind(1 + iota)
+  TYPE_UINT8  = Kind(1 + iota)
+  TYPE_SINT8  = Kind(1 + iota)
+  TYPE_UINT16 = Kind(1 + iota)
+  TYPE_SINT16 = Kind(1 + iota)
+  TYPE_UINT32 = Kind(1 + iota)
+  TYPE_SINT32 = Kind(1 + iota)
+  TYPE_UINT64 = Kind(1 + iota)
+  TYPE_SINT64 = Kind(1 + iota)
+  TYPE_FLOAT  = Kind(1 + iota)
+  TYPE_DOUBLE = Kind(1 + iota)
+  TYPE_UCHAR  = Kind(1 + iota)
+  TYPE_SCHAR  = Kind(1 + iota)
+  TYPE_USHORT = Kind(1 + iota)
+  TYPE_SSHORT = Kind(1 + iota)
+  TYPE_UINT   = Kind(1 + iota)
+  TYPE_SINT   = Kind(1 + iota)
+  TYPE_ULONG  = Kind(1 + iota)
+  TYPE_SLONG  = Kind(1 + iota)
+  TYPE_LONGD  = Kind(1 + iota)
+  TYPE_POINTER= Kind(1 + iota)
+  TYPE_STRUCT = Kind(1 + iota)
 )
 
-type Type struct{}
+type Type struct {
 
-
-func (kind Kind) c() *_C_ffi_type {
-	switch kind {
-	case TYPE_VOID:
-		return &*_C_ffi_type_void
-	case TYPE_UINT8:
-		return &*_C_ffi_type_uint8
-	case TYPE_SINT8:
-		return &*_C_ffi_type_sint8
-	case TYPE_UINT16:
-		return &*_C_ffi_type_uint16
-	case TYPE_SINT16:
-		return &*_C_ffi_type_sint16
-	case TYPE_UINT32:
-		return &*_C_ffi_type_uint32
-	case TYPE_SINT32:
-		return &*_C_ffi_type_sint32
-	case TYPE_UINT64:
-		return &*_C_ffi_type_uint64
-	case TYPE_SINT64:
-		return &*_C_ffi_type_sint64
-	case TYPE_DOUBLE:
-		return &*_C_ffi_type_double
-	case TYPE_FLOAT:
-		return &*_C_ffi_type_float
-	case TYPE_UCHAR:
-		return &*_C_ffi_type_uchar
-	case TYPE_SCHAR:
-		return &*_C_ffi_type_schar
-	case TYPE_USHORT:
-		return &*_C_ffi_type_ushort
-	case TYPE_SSHORT:
-		return &*_C_ffi_type_sshort
-	case TYPE_UINT:
-		return &*_C_ffi_type_uint
-	case TYPE_SINT:
-		return &*_C_ffi_type_sint
-	case TYPE_ULONG:
-		return &*_C_ffi_type_ulong
-	case TYPE_SLONG:
-		return &*_C_ffi_type_slong
-	case TYPE_POINTER:
-		return &*_C_ffi_type_pointer
-	default:
-		return nil
-	}
-	return nil
 }
+
+
+
+
+func (kind Kind) c() (* C.ffi_type) {
+  switch (kind) {
+  case TYPE_VOID: 	return &C.ffi_type_void
+  case TYPE_UINT8:	return &C.ffi_type_uint8
+  case TYPE_SINT8:	return &C.ffi_type_sint8
+  case TYPE_UINT16:	return &C.ffi_type_uint16
+  case TYPE_SINT16:	return &C.ffi_type_sint16
+  case TYPE_UINT32:	return &C.ffi_type_uint32
+  case TYPE_SINT32:	return &C.ffi_type_sint32
+  case TYPE_UINT64:	return &C.ffi_type_uint64
+  case TYPE_SINT64:	return &C.ffi_type_sint64
+  case TYPE_DOUBLE:	return &C.ffi_type_double
+  case TYPE_FLOAT:	return &C.ffi_type_float
+  case TYPE_UCHAR:	return &C.ffi_type_uchar
+  case TYPE_SCHAR:	return &C.ffi_type_schar
+  case TYPE_USHORT:	return &C.ffi_type_ushort
+  case TYPE_SSHORT:	return &C.ffi_type_sshort
+  case TYPE_UINT:	return &C.ffi_type_uint
+  case TYPE_SINT:	return &C.ffi_type_sint
+  case TYPE_ULONG:	return &C.ffi_type_ulong
+  case TYPE_SLONG:	return &C.ffi_type_slong
+  case TYPE_POINTER:	return &C.ffi_type_pointer
+  default:
+    return nil
+  }
+  return nil
+}
+*/
 
 type Callable struct {
 	cif	*_C_ffi_cif
@@ -151,14 +136,151 @@ type Callable struct {
 	cifs	_C_ffi_cif
 }
 
+type CType int
+
+const TYPE_VOID = CType(FFI_TYPE_VOID)
+const TYPE_POINTER = CType(FFI_TYPE_POINTER)
+const TYPE_UINT8 = CType(FFI_TYPE_UINT8)
+const TYPE_SINT8 = CType(FFI_TYPE_SINT8)
+const TYPE_UINT16 = CType(FFI_TYPE_UINT16)
+const TYPE_SINT16 = CType(FFI_TYPE_SINT16)
+const TYPE_UINT32 = CType(FFI_TYPE_UINT32)
+const TYPE_SINT32 = CType(FFI_TYPE_SINT32)
+const TYPE_UINT64 = CType(FFI_TYPE_UINT64)
+const TYPE_SINT64 = CType(FFI_TYPE_SINT64)
+const TYPE_FLOAT = CType(FFI_TYPE_FLOAT)
+const TYPE_DOUBLE = CType(FFI_TYPE_DOUBLE)
+const TYPE_STRUCT = CType(FFI_TYPE_STRUCT)
+
+
+/* Type is a wrapper around ffi_type */
+type Type struct {
+	ffi_type _C_ffi_type
+}
+
+func ffi_type_make(size int, alignment int, typ CType, elements **_C_ffi_type) _C_ffi_type {
+
+	csize := _C_size_t(size)
+	calign := _C_ushort(alignment)
+	ctype := _C_ushort(typ)
+	celem := (**_Cstruct__ffi_type)(elements)
+
+	return _C_ffi_type{csize, calign, ctype, celem}
+}
+
+func ffi_type_for(typ CType, elements **_C_ffi_type) _C_ffi_type {
+	// I'm hoping here that GO's alignof gives us the right result
+	var aid_uint8 uint8
+	var aid_uint16 uint16
+	var aid_uint32 uint32
+	var aid_uint64 uint64
+	var aid_sint8 int8
+	var aid_sint16 int16
+	var aid_sint32 int32
+	var aid_sint64 int64
+	var aid_float float32
+	var aid_double float64
+	var aid_pointer unsafe.Pointer
+
+	var uint8_align = unsafe.Alignof(aid_uint8)
+	var uint16_align = unsafe.Alignof(aid_uint16)
+	var uint32_align = unsafe.Alignof(aid_uint32)
+	var uint64_align = unsafe.Alignof(aid_uint64)
+	var sint8_align = unsafe.Alignof(aid_sint8)
+	var sint16_align = unsafe.Alignof(aid_sint16)
+	var sint32_align = unsafe.Alignof(aid_sint32)
+	var sint64_align = unsafe.Alignof(aid_sint64)
+	var pointer_align = unsafe.Alignof(aid_pointer)
+	var double_align = unsafe.Alignof(aid_double)
+	var float_align = unsafe.Alignof(aid_float)
+
+	var uint8_size = unsafe.Sizeof(aid_uint8)
+	var uint16_size = unsafe.Sizeof(aid_uint16)
+	var uint32_size = unsafe.Sizeof(aid_uint32)
+	var uint64_size = unsafe.Sizeof(aid_uint64)
+	var sint8_size = unsafe.Sizeof(aid_sint8)
+	var sint16_size = unsafe.Sizeof(aid_sint16)
+	var sint32_size = unsafe.Sizeof(aid_sint32)
+	var sint64_size = unsafe.Sizeof(aid_sint64)
+	var pointer_size = unsafe.Sizeof(aid_pointer)
+	var double_size = unsafe.Sizeof(aid_double)
+	var float_size = unsafe.Sizeof(aid_float)
+
+	switch typ {
+	case TYPE_VOID:
+		return ffi_type_make(1, 1, typ, nil)
+	case TYPE_POINTER:
+		return ffi_type_make(pointer_size, pointer_align, typ, nil)
+	case TYPE_UINT8:
+		return ffi_type_make(uint8_size, uint8_align, typ, nil)
+	case TYPE_SINT8:
+		return ffi_type_make(sint8_size, sint8_align, typ, nil)
+	case TYPE_UINT16:
+		return ffi_type_make(uint16_size, uint16_align, typ, nil)
+	case TYPE_SINT16:
+		return ffi_type_make(sint16_size, sint16_align, typ, nil)
+	case TYPE_UINT32:
+		return ffi_type_make(uint32_size, uint32_align, typ, nil)
+	case TYPE_SINT32:
+		return ffi_type_make(sint32_size, sint32_align, typ, nil)
+	case TYPE_UINT64:
+		return ffi_type_make(uint64_size, uint64_align, typ, nil)
+	case TYPE_SINT64:
+		return ffi_type_make(sint64_size, sint64_align, typ, nil)
+	case TYPE_FLOAT:
+		return ffi_type_make(float_size, float_align, typ, nil)
+	case TYPE_DOUBLE:
+		return ffi_type_make(double_size, double_align, typ, nil)
+	default:	// struct
+		return ffi_type_make(0, 0, typ, elements)
+	}
+	// we cannot get here, but go complains, so ...
+	return ffi_type_make(1, 1, typ, nil)
+
+}
+
+
+/** WAs a workaround for a cgo bug, we define our own
+* ffi_types using these functions
+ #define FFI_TYPEDEF(name, type, id)    \
+struct struct_align_##name {      \
+  char c;         \
+  type x;         \
+};            \
+const ffi_type ffi_type_##name = {    \
+  sizeof(type),         \
+  offsetof(struct struct_align_##name, x),  \
+  id, NULL          \
+}
+
+// Size and alignment are fake here. They must not be 0.
+const ffi_type ffi_type_void = {
+  1, 1, FFI_TYPE_VOID, NULL
+};
+
+FFI_TYPEDEF(uint8, UINT8, FFI_TYPE_UINT8);
+FFI_TYPEDEF(sint8, SINT8, FFI_TYPE_SINT8);
+FFI_TYPEDEF(uint16, UINT16, FFI_TYPE_UINT16);
+FFI_TYPEDEF(sint16, SINT16, FFI_TYPE_SINT16);
+FFI_TYPEDEF(uint32, UINT32, FFI_TYPE_UINT32);
+FFI_TYPEDEF(sint32, SINT32, FFI_TYPE_SINT32);
+FFI_TYPEDEF(uint64, UINT64, FFI_TYPE_UINT64);
+FFI_TYPEDEF(sint64, SINT64, FFI_TYPE_SINT64);
+
+FFI_TYPEDEF(pointer, void*, FFI_TYPE_POINTER);
+
+FFI_TYPEDEF(float, float, FFI_TYPE_FLOAT);
+FFI_TYPEDEF(double, double, FFI_TYPE_DOUBLE);
+
+*/
+
 
 type ffi_func *[0]uint8
 
 func Prepare(fun *Function, nargs uint) (*Callable, int) {
-	var ffi_type_void _C_ffi_type = _C_ffi_type{_C_size_t(1), _C_ushort(1), FFI_TYPE_VOID, nil}
-
 	var cif _C_ffi_cif
 	var typp *_C_ffi_type
+	ffi_type_void := ffi_type_for(TYPE_VOID, nil)
 	// recover from panic here
 	defer func() {
 		if x := recover(); x != nil {
