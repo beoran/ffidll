@@ -18,19 +18,23 @@
 // #mode user "" "" "(" "," ")" "(" ")" "#" "\\"
 //#mode meta "." "\n" "(" "{" ")" "(" ")"
 #mode user ""  "\n" "(" "," ")" "(" ")" "#" "\\"
-#mode meta "." "\n" "(" "{" ")" "" ""
+// #mode meta "." "\n" "\w{\w" "\w:\w" "\w}" "{" "}"
+//#mode meta "." "\n" "\b" "\w:\w{\n" "\w}\w" "" ""
+#mode meta "." "\n" "\b" ":{" "}" "{" "}"
 
-.define(hello)
+.define hello
  
-.define(sum(a,b){.eval(#1+#2))
+.define do(a):{ I\'m doing a }
+.define sum(a,b):{.eval #1+#2}
 
 /*
 #define macro #define #1 #2 # 3 #4 #5 #6 #7 #8 #9
 macro(sum, \#1, \#2, #eval \#1+\#2)
 */
 
-.ifdef(hello)
+.ifdef hello
 "Hello"
+do(nothing)
 sum(1,2)
 
 .endif
