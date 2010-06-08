@@ -6,8 +6,8 @@ include $(GOROOT)/src/Make.$(GOARCH)
 
 TARG=ffidll
 
-GOFILES:=helper.go
-# audio.go
+GOFILES:=helper.go ffi_raw.go
+OFILES=ffi_$(GOARCH).$O
 CGOFILES:=dll_$(GOOS).go ffi.go
 
 # CGO_CFLAGS:=`pkg-config --cflags sdl`

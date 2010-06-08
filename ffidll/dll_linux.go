@@ -141,3 +141,10 @@ func (fun * Function) CallVoid() {
   (*vf)()
 }
 
+func (fun * Function) Pointer() (unsafe.Pointer) {
+  if (fun == nil) { return  nil }  
+  return unsafe.Pointer(fun.ptr)
+}
+
+
+

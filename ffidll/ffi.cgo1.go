@@ -300,7 +300,7 @@ func Prepare(fun *Function, nargs uint) (*Callable, int) {
 	call.cif.abi = FFI_DEFAULT_ABI
 	call.cif.nargs = _C_uint(nargs)
 	call.fun = fun
-	call.cif.rtype = &*_C_ffi_type_void
+	call.cif.rtype = &ffi_type_void
 	//stat          := 777
 	println("cif address:", (unsafe.Pointer)(call.cif))
 	println("void type address:", (unsafe.Pointer)(&ffi_type_void))
